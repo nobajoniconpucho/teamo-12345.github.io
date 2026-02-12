@@ -38,23 +38,14 @@ function startSite() {
 
     }, 600);
 
-    // 🔥 Reproducción segura
-    music.muted = false;
-    music.volume = 0;
-    
-    music.play().then(() => {
-        fadeInMusic(1500);
-    }).catch(() => {
-        console.log("Autoplay bloqueado");
+    // 🎵 Reproducción directa sin muted
+    music.volume = 1;
+    music.play().catch(err => {
+        console.log("Safari bloqueó:", err);
     });
 }
 
-// PC
-document.addEventListener('click', startSite);
-
-// CELULAR
-document.addEventListener('touchstart', startSite);
-
+document.addEventListener('pointerdown', startSite);
 
 /* ============================= */
 /* 🔊 BOTÓN MÚSICA */
@@ -222,4 +213,5 @@ secretBtn.addEventListener("click", function(e) {
         alert("❌ Contraseña incorrecta");
     }
 });
+
 
