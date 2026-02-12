@@ -174,7 +174,7 @@ links.forEach((link, index) => {
 
 const secretBtn = document.getElementById("secret-btn");
 
-const PASSWORD = "1402"; // ← tu contraseña
+const PASSWORD = "12345"; // ← tu contraseña
 
 secretBtn.addEventListener("click", function(e) {
     e.stopPropagation();
@@ -192,3 +192,4 @@ secretBtn.addEventListener("click", function(e) {
 
     }
 });
+
