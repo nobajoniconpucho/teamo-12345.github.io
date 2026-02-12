@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi San Valentín</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Pantalla inicial -->
+    <div id="heart-screen" class="screen">
+        <div class="heart-container">
+            <div class="pulse-ring ring-1"></div>
+            <div class="pulse-ring ring-2"></div>
+            <svg class="main-heart" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/>
+            </svg>
+        </div>
+        <p class="instruction">Toca en cualquier lado</p>
+    </div>
+
+    <!-- Contenido principal -->
+<!-- Contenido principal -->
+<div id="main-content" class="screen hidden">
+    <div class="romantic-container">
+
+        <div class="top-heart reveal">❤</div>
+        <h1 class="title reveal">Para Vos</h1>
+        <div class="divider reveal"></div>
+
+        <!-- CARTA -->
+        <div class="letter-card reveal">
+            <div class="date">14 DE FEBRERO</div>
+
+            <p>Mi amor,</p>
+
+            <p>
+                Gracias por elegirme a pesar de todo lo que paso, la verdad que me haces muy feliz.
+            </p>
+
+            <p>
+                Capaz no soy el chabon mas seguro de todos, sobrepienso una banda, pero 
+                me gustaria tener algo muy lindo con vos.
+            </p>
+
+            <p>
+                Gracias por elegirme a pesar de como soy jaja, te amo mucho.
+            </p>
+
+            <p>Te amo hoy, mañana y siempre.</p>
+
+            <p class="signature">Con todo mi amor ❤️</p>
+        </div>
+
+        <!-- GALERÍA -->
+        <section class="gallery-section">
+            <h2 class="gallery-title reveal">NUESTROS MOMENTOS</h2>
+            <div class="gallery-line reveal"></div>
+
+            <div class="gallery">
+                <div class="photo reveal"><img src="img1.jpg" alt=""></div>
+                <div class="photo reveal"><img src="img2.jpg" alt=""></div>
+                <div class="photo reveal"><img src="img3.jpg" alt=""></div>
+                <div class="photo reveal"><img src="img4.jpg" alt=""></div>
+            </div>
+        </section>
+
+                        <!-- SECCIÓN DE CANCIONES -->
+<section class="song-section">
+
+    <h2 class="gallery-title reveal">TUS CANCIONES</h2>
+    <div class="gallery-line reveal"></div>
+
+    <div class="song-slider reveal">
+
+        <!-- Flecha izquierda -->
+        <button class="arrow left-arrow">&#10094;</button>
+
+        <!-- Contenedor de canciones -->
+        <div class="song-container">
+
+            <a href="https://youtu.be/5DvPc7lIH0Q?t=138" target="_blank" class="song-link active">
+                <img src="imgMiSanta.png" class="song-img">
+            </a>
+
+            <a href="https://youtu.be/MldGX_mbS-o?t=3" target="_blank" class="song-link">
+                <img src="MAI.png" class="song-img">
+            </a>
+
+            <a href="https://youtu.be/IOHh7vkX5O0?t=20" target="_blank" class="song-link">
+                <img src="hechapami.png" class="song-img">
+            </a>
+
+            <a href="https://youtu.be/SOXYr6CsUJU?t=51" target="_blank" class="song-link">
+                <img src="tusvueltas.png" class="song-img">
+            </a>
+
+            <a href="https://youtu.be/vmbyVU9w47Y?t=11" target="_blank" class="song-link">
+                <img src="weltita.png" class="song-img">
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=a1Femq4NPxs"
+                target="_blank"
+                class="song-link secret-song"
+                style="display: none;">
+                <img src="dtmf.png" class="song-img">
+</a>
+
+
+        </div>
+
+        <!-- Flecha derecha -->
+        <button class="arrow right-arrow">&#10095;</button>
+
+    </div>
+
+</section>
+
+
+
+
+        <!-- BOTÓN FINAL -->
+        <div class="final-section reveal">
+            <button class="surprise-btn" id="secret-btn">
+            ????
+</button>
+
+            </a>
+
+            <div class="bottom-heart">💘</div>
+        </div>
+
+    </div>
+</div>
+
+
+    <!-- Música -->
+    <audio id="bg-music" loop>
+        <source src="misanta.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Botón música -->
+    <button id="music-toggle" class="music-btn hidden">🔊</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

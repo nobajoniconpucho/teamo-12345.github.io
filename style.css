@@ -1,0 +1,694 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    color: white;
+}
+
+.screen {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease;
+}
+#heart-screen {
+    position: fixed;
+    inset: 0;
+}
+
+
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* Corazón */
+.heart-container {
+    position: relative;
+}
+
+.pulse-ring {
+    position: absolute;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.ring-1 {
+    background: radial-gradient(circle, rgba(220,38,38,0.4) 0%, transparent 70%);
+    animation: pulse 2s infinite;
+}
+
+.ring-2 {
+    background: radial-gradient(circle, rgba(239,68,68,0.5) 0%, transparent 70%);
+    animation: pulse 2s infinite 0.3s;
+}
+
+.heart-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-heart {
+    width: 110px;
+    height: 110px;
+    color: #dc2626;
+    position: relative;
+    z-index: 2;
+    animation: heartbeat 1.2s infinite;
+}
+
+/* Glow centrado perfecto */
+.heart-container::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(255,0,0,0.6) 0%, rgba(255,0,0,0.2) 40%, transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: glowPulse 2s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+
+.instruction {
+    margin-top: 40px;
+    opacity: 0.6;
+    letter-spacing: 4px;
+    font-size: 0.8rem;
+    animation: fadeText 2s infinite;
+}
+
+@keyframes fadeText {
+    0%,100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Carta */
+.letter-box {
+    text-align: center;
+    max-width: 80%;
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* BOTÓN MUSICA */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(220,38,38,0.85);
+    border: none;
+    color: white;
+    font-size: 22px;
+    padding: 14px 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: all 0.5s ease;
+    z-index: 100;
+    box-shadow: 0 0 15px rgba(220,38,38,0.6);
+    transform: translateY(30px);
+    opacity: 0;
+}
+
+.music-btn.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.music-btn.playing {
+    animation: pulseMusic 1.5s infinite;
+    box-shadow: 0 0 25px rgba(239,68,68,1);
+}
+
+@keyframes pulseMusic {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* Corazones flotando */
+.floating-heart {
+    position: fixed;
+    font-size: 18px;
+    animation: floatUp 2s ease forwards;
+    pointer-events: none;
+    z-index: 200;
+}
+
+@keyframes floatUp {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-80px) scale(1.5); }
+}
+
+/* Fondo romántico oscuro (más negro que rojo) */
+#main-content {
+    background: linear-gradient(-45deg, 
+        #000000, 
+        #120000, 
+        #1a0000, 
+        #000000
+    );
+    background-size: 400% 400%;
+    animation: romanticBackground 12s ease infinite;
+}
+
+@keyframes romanticBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+/* Fondo segunda pantalla */
+#main-content {
+    background: linear-gradient(to bottom, #2a0000, #000000);
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+/* Contenedor general */
+.romantic-container {
+    text-align: center;
+    color: #ff6b6b;
+}
+
+/* Corazón arriba */
+.top-heart {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* Título */
+.title {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 48px;
+}
+
+
+
+/* Línea decorativa */
+.divider {
+    width: 120px;
+    height: 2px;
+    margin: 18px auto 35px auto;
+    background: linear-gradient(
+        to right,
+        transparent,
+        #ff6b6b,
+        #ff4d4d,
+        #ff6b6b,
+        transparent
+    );
+    border-radius: 50px;
+}
+
+
+/* Carta */
+.letter-card {
+    background: #e8dfd7;
+    color: #3a2e2a;
+    max-width: 580px;
+    margin: 60px auto;
+    padding: 45px 50px;
+    text-align: left;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    border-radius: 18px;
+    position: relative;
+
+    animation: letterEntrance 1.6s ease forwards, romanticGlow 3s ease-in-out infinite;
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+}
+
+@keyframes letterEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.95);
+        box-shadow: 0 0 0 rgba(255,0,0,0);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 0 80px rgba(255,0,0,0.6);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 55px rgba(255,0,0,0.45);
+    }
+}
+
+@keyframes romanticGlow {
+    0%,100% {
+        box-shadow: 0 0 50px rgba(255,0,0,0.4);
+    }
+    50% {
+        box-shadow: 0 0 90px rgba(255,0,0,0.8);
+    }
+}
+
+
+
+
+/* Fecha */
+.date {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #e88;
+    margin-bottom: 30px;
+}
+
+/* Firma */
+.signature {
+    margin-top: 30px;
+}
+
+/* Bordes decorativos */
+.letter-card::before,
+.letter-card::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #e8a0a0;
+}
+
+.letter-card::before {
+    top: 20px;
+    left: 20px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.letter-card::after {
+    bottom: 20px;
+    right: 20px;
+    border-left: none;
+    border-top: none;
+}
+.gallery-section {
+    background: transparent; /* ← esto lo deja igual que el fondo principal */
+    padding: 80px 20px;
+}
+
+
+.gallery-title {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: #ff4d4d;
+    margin-bottom: 15px;
+}
+
+.gallery-line {
+    width: 120px;
+    height: 1px;
+    background: rgba(255, 77, 77, 0.4);
+    margin: 0 auto 60px auto;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.photo {
+    overflow: hidden;
+    border-radius: 12px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+        /* 🔴 Resplandor igual al botón */
+    box-shadow: 0 0 35px rgba(255, 26, 26, 0.5);
+}
+
+.photo:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        /* 🔥 Un poquito más intenso al hover */
+    box-shadow: 0 0 15px rgba(255, 26, 26, 0.6);
+}
+
+.photo:hover img {
+    transform: scale(1.05);
+}
+/* ===== SECCIÓN FINAL ===== */
+
+.final-section {
+    text-align: center;
+    padding: 80px 20px 60px 20px;
+}
+
+/* BOTÓN SORPRESA */
+
+.surprise-btn {
+    display: inline-block;
+    padding: 18px 50px;
+    border-radius: 40px;
+    background: linear-gradient(145deg, #b91c1c, #7f1d1d);
+    color: white;
+    text-decoration: none;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 14px;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        /* ✨ Resplandor suave */
+    box-shadow: 0 0 60px rgba(255, 26, 26, 0.5);
+}
+
+.surprise-btn:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(145deg, #dc2626, #991b1b);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+        /* 🔴 Un poquito más intenso al pasar el mouse */
+    box-shadow: 0 0 15px rgba(255, 26, 26, 0.6);
+    transform: scale(1.05);
+}
+
+/* CORAZÓN FINAL */
+
+.bottom-heart {
+    margin-top: 35px;
+    font-size: 22px;
+    color: #ff4d4d;
+    opacity: 0.8;
+    animation: heartbeat 1.5s infinite ease-in-out;
+}
+@keyframes letterEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.95);
+        box-shadow: 0 0 0 rgba(220,38,38,0);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 0 60px rgba(220,38,38,0.25);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 40px rgba(220,38,38,0.18);
+    }
+}
+/* Reset importante */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Contenedor principal bien centrado */
+.romantic-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* CENTRA TODO */
+}
+
+/* Carta bien centrada */
+.letter-card {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 40px auto;
+    padding: 40px 30px;
+    border-radius: 30px;
+}
+
+/* Galería centrada */
+.gallery-section {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+.gallery {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Fotos */
+.photo {
+    width: 200px;
+    height: 200px;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@media (max-width: 768px) {
+
+    .romantic-container {
+        padding: 30px 15px;
+    }
+
+    .letter-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 20px;
+        font-size: 14px;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .photo {
+        width: 100%;
+        height: 140px;
+    }
+
+    .surprise-btn {
+        width: 100%;
+    }
+}
+/* ========================= */
+/* ===== TUS CANCIONES ===== */
+/* ========================= */
+
+.song-section {
+    width: 100%;
+    text-align: center;
+    padding: 60px 20px 40px 20px; /* menos espacio arriba */
+    position: relative;
+}
+
+/* Título */
+.song-section .gallery-title {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: #ff4d4d;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* Línea */
+.song-section .gallery-line {
+    width: 120px;
+    height: 1px;
+    background: rgba(255, 77, 77, 0.4);
+    margin: 0 auto 40px auto;
+}
+
+/* Slider */
+.song-slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0; /* sacamos el margin grande que lo bajaba */
+}
+
+/* Contenedor de canción */
+.song-container {
+    position: relative;
+    width: 65%;
+    max-width: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Links */
+.song-link {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.song-link.active {
+    opacity: 1;
+    position: relative;
+}
+
+/* Imagen */
+.song-img {
+    width: 100%;
+    height: auto;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+
+.song-img:hover {
+    transform: scale(1.03);
+}
+
+/* Flechas */
+.arrow {
+    background: rgba(0,0,0,0.4);
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+}
+
+.left-arrow {
+    left: 5%;
+}
+
+.right-arrow {
+    right: 5%;
+}
+
+.arrow:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+/* Espaciado entre secciones */
+.gallery-section,
+.song-section,
+.final-section {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .song-container {
+        width: 80%;
+    }
+
+    .arrow {
+        font-size: 22px;
+        padding: 8px 12px;
+    }
+}
+/* ================================= */
+/* 🔥 GLOW PERSONALIZADO POR CANCIÓN */
+/* ================================= */
+
+/* 🎵 Canción 1 – rgb(184,134,11) */
+.song-link:nth-child(1).active .song-img {
+    animation: glow1 1.6s infinite alternate;
+}
+
+@keyframes glow1 {
+    from { box-shadow: 0 0 20px rgba(184,134,11,0.6); }
+    to   { box-shadow: 0 0 55px rgba(184,134,11,1); }
+}
+
+
+/* 🎵 Canción 2 – rgb(72,209,204) */
+.song-link:nth-child(2).active .song-img {
+    animation: glow2 1.6s infinite alternate;
+}
+
+@keyframes glow2 {
+    from { box-shadow: 0 0 20px rgba(72,209,204,0.6); }
+    to   { box-shadow: 0 0 55px rgba(72,209,204,1); }
+}
+
+
+/* 🎵 Canción 3 – rgb(238,130,238) */
+.song-link:nth-child(3).active .song-img {
+    animation: glow3 1.6s infinite alternate;
+}
+
+@keyframes glow3 {
+    from { box-shadow: 0 0 20px rgba(238,130,238,0.6); }
+    to   { box-shadow: 0 0 55px rgba(238,130,238,1); }
+}
+
+
+/* 🎵 Canción 4 – rgb(0,0,255) */
+.song-link:nth-child(4).active .song-img {
+    animation: glow4 1.6s infinite alternate;
+}
+
+@keyframes glow4 {
+    from { box-shadow: 0 0 20px rgba(0,0,255,0.6); }
+    to   { box-shadow: 0 0 55px rgba(0,0,255,1); }
+}
+
+/* 🎵 Canción 5 – rgb(154, 205, 50) */
+.song-link:nth-child(5).active .song-img {
+    animation: glow5 1.6s infinite alternate;
+}
+
+@keyframes glow5 {
+    from { box-shadow: 0 0 20px rgba(154, 205, 50,0.6); }
+    to   { box-shadow: 0 0 55px rgba(154, 205, 50,1); }
+}
