@@ -11,7 +11,6 @@ const toggleBtn = document.getElementById('music-toggle');
 music.setAttribute("playsinline", "");
 music.setAttribute("webkit-playsinline", "");
 music.preload = "auto";
-music.muted = true; // truco para permitir autoplay
 
 let siteStarted = false;
 
@@ -21,7 +20,7 @@ let siteStarted = false;
 
 function startSite() {
 
-    if (siteStarted) return; // evita doble ejecución
+    if (siteStarted) return;
     siteStarted = true;
 
     heartScreen.classList.add('hidden');
@@ -39,14 +38,14 @@ function startSite() {
 
     }, 600);
 
-    // 🔥 Desbloqueo seguro de audio en móviles
+    // 🔥 Reproducción segura
+    music.muted = false;
+    music.volume = 0;
+    
     music.play().then(() => {
-        music.muted = false;
         fadeInMusic(1500);
     }).catch(() => {
-        // si falla, reintenta sin muted
-        music.muted = false;
-        music.play().catch(()=>{});
+        console.log("Autoplay bloqueado");
     });
 }
 
@@ -78,7 +77,7 @@ toggleBtn.addEventListener('click', function (e) {
 });
 
 function fadeInMusic(duration) {
-    music.volume = 0;
+
     let step = 0.05;
     let interval = duration * step;
 
@@ -90,6 +89,7 @@ function fadeInMusic(duration) {
         }
     }, interval);
 }
+
 
 function fadeOutMusic(duration) {
     let step = 0.05;
@@ -222,3 +222,4 @@ secretBtn.addEventListener("click", function(e) {
         alert("❌ Contraseña incorrecta");
     }
 });
+
