@@ -3,7 +3,11 @@ const mainContent = document.getElementById('main-content');
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 
-document.addEventListener('click', function () {
+/* ============================= */
+/* 🔥 INICIO (PC + CELULAR) */
+/* ============================= */
+
+function startSite() {
 
     if (!heartScreen.classList.contains('hidden')) {
 
@@ -16,11 +20,24 @@ document.addEventListener('click', function () {
             toggleBtn.classList.add('show');
 
             spawnHearts();
+            initScrollReveal();
+
         }, 600);
 
         fadeInMusic(2000);
     }
-});
+}
+
+// PC
+document.addEventListener('click', startSite);
+
+// CELULAR
+document.addEventListener('touchstart', startSite);
+
+
+/* ============================= */
+/* 🔊 BOTÓN MÚSICA */
+/* ============================= */
 
 toggleBtn.addEventListener('click', function (e) {
     e.stopPropagation();
@@ -67,6 +84,11 @@ function fadeOutMusic(duration) {
     }, interval);
 }
 
+
+/* ============================= */
+/* 💖 CORAZONES FLOTANDO */
+/* ============================= */
+
 function spawnHearts() {
     for (let i = 0; i < 8; i++) {
         const heart = document.createElement("div");
@@ -84,7 +106,10 @@ function spawnHearts() {
     }
 }
 
-/* ===== SCROLL REVEAL ===== */
+
+/* ============================= */
+/* ✨ SCROLL REVEAL */
+/* ============================= */
 
 function initScrollReveal() {
 
@@ -103,17 +128,10 @@ function initScrollReveal() {
     reveals.forEach(el => observer.observe(el));
 }
 
-const originalSetTimeout = setTimeout;
 
-document.addEventListener("click", function () {
-    if (!heartScreen.classList.contains('hidden')) {
-        originalSetTimeout(() => {
-            initScrollReveal();
-        }, 700);
-    }
-});
-
-/* ===== SLIDER DE CANCIONES ===== */
+/* ============================= */
+/* 🎵 SLIDER DE CANCIONES */
+/* ============================= */
 
 const links = document.querySelectorAll(".song-link");
 const leftArrow = document.querySelector(".left-arrow");
@@ -126,7 +144,6 @@ function showSlide(index) {
     links[index].classList.add("active");
 }
 
-// Siguiente
 function nextSlide() {
     currentIndex++;
     if (currentIndex >= links.length) {
@@ -135,7 +152,6 @@ function nextSlide() {
     showSlide(currentIndex);
 }
 
-// Anterior
 function prevSlide() {
     currentIndex--;
     if (currentIndex < 0) {
@@ -154,27 +170,25 @@ leftArrow.addEventListener("click", function(e){
     prevSlide();
 });
 
-// 🔥 CORRECCIÓN IMPORTANTE
 links.forEach((link, index) => {
     link.addEventListener("click", function(e) {
 
-        // Si NO es la activa → solo cambia slide
         if (!link.classList.contains("active")) {
             e.preventDefault();
             currentIndex = index;
             showSlide(currentIndex);
         }
 
-        // Si es la activa → abre el link normal
     });
 });
+
+
 /* ============================= */
-/* 🔐 CANCIÓN SECRETA CON CLAVE */
+/* 🔐 CANCIÓN SECRETA */
 /* ============================= */
 
 const secretBtn = document.getElementById("secret-btn");
-
-const PASSWORD = "12345"; // ← tu contraseña
+const PASSWORD = "12345"; // Cambiá esto si querés
 
 secretBtn.addEventListener("click", function(e) {
     e.stopPropagation();
@@ -182,14 +196,8 @@ secretBtn.addEventListener("click", function(e) {
     const userInput = prompt("Ingresa la contraseña 💌");
 
     if (userInput === PASSWORD) {
-
-        // Redirige a otra página
         window.location.href = "secreto/index.html";
-
     } else if (userInput !== null) {
-
         alert("❌ Contraseña incorrecta");
-
     }
 });
-
