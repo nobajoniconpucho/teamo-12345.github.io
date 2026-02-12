@@ -4,28 +4,50 @@ const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 
 /* ============================= */
+/* 🎵 CONFIGURACIÓN MÁXIMA COMPATIBILIDAD */
+/* ============================= */
+
+// Necesario para iPhone
+music.setAttribute("playsinline", "");
+music.setAttribute("webkit-playsinline", "");
+music.preload = "auto";
+music.muted = true; // truco para permitir autoplay
+
+let siteStarted = false;
+
+/* ============================= */
 /* 🔥 INICIO (PC + CELULAR) */
 /* ============================= */
 
 function startSite() {
 
-    if (!heartScreen.classList.contains('hidden')) {
+    if (siteStarted) return; // evita doble ejecución
+    siteStarted = true;
 
-        heartScreen.classList.add('hidden');
+    heartScreen.classList.add('hidden');
 
-        setTimeout(() => {
-            mainContent.classList.remove('hidden');
+    setTimeout(() => {
+        mainContent.classList.remove('hidden');
 
-            toggleBtn.classList.remove('hidden');
-            toggleBtn.classList.add('show');
+        toggleBtn.classList.remove('hidden');
+        toggleBtn.classList.add('show');
+        toggleBtn.classList.add("playing");
+        toggleBtn.textContent = "🔊";
 
-            spawnHearts();
-            initScrollReveal();
+        spawnHearts();
+        initScrollReveal();
 
-        }, 600);
+    }, 600);
 
-        fadeInMusic(2000);
-    }
+    // 🔥 Desbloqueo seguro de audio en móviles
+    music.play().then(() => {
+        music.muted = false;
+        fadeInMusic(1500);
+    }).catch(() => {
+        // si falla, reintenta sin muted
+        music.muted = false;
+        music.play().catch(()=>{});
+    });
 }
 
 // PC
@@ -47,6 +69,7 @@ toggleBtn.addEventListener('click', function (e) {
         toggleBtn.classList.remove("playing");
         toggleBtn.textContent = "🔇";
     } else {
+        music.muted = false;
         fadeInMusic(800);
         toggleBtn.classList.add("playing");
         toggleBtn.textContent = "🔊";
@@ -56,7 +79,6 @@ toggleBtn.addEventListener('click', function (e) {
 
 function fadeInMusic(duration) {
     music.volume = 0;
-    music.play().catch(()=>{});
     let step = 0.05;
     let interval = duration * step;
 
@@ -65,7 +87,6 @@ function fadeInMusic(duration) {
             music.volume = Math.min(music.volume + step, 1);
         } else {
             clearInterval(fade);
-            toggleBtn.classList.add("playing");
         }
     }, interval);
 }
@@ -133,7 +154,7 @@ function initScrollReveal() {
 /* 🎵 SLIDER DE CANCIONES */
 /* ============================= */
 
-const links = document.querySelectorAll(".song-link");
+const links = document.querySelectorAll(".song-link:not(.secret-song)");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 
@@ -188,7 +209,7 @@ links.forEach((link, index) => {
 /* ============================= */
 
 const secretBtn = document.getElementById("secret-btn");
-const PASSWORD = "12345"; // Cambiá esto si querés
+const PASSWORD = "12345";
 
 secretBtn.addEventListener("click", function(e) {
     e.stopPropagation();
